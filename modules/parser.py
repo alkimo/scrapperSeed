@@ -1,6 +1,8 @@
 import argparse
 import time
 import os
+import re
+from urllib.parse import urlparse
 
 def initParse():
     # Initiate the parser
@@ -12,7 +14,7 @@ def initParse():
     # Nome do browser a ser usado
     parser.add_argument("-b", help="Browser a ser utilizado: Chrome ou Firefox")
 
-    # Nome da pasta para salvar os dados
+    # Nome do browser a ser usado
     parser.add_argument("-n", help="Nome da pasta a ser salvo os dados")
 
     # Read arguments from the command line
@@ -25,7 +27,6 @@ def initParse():
         args.b = "Chrome"
 
     if(args.n == None):
-        args.n = os.path.basename(args.url)
-        # args.n = time.strftime("%Y%m%d-%H%M%S")
-
+        args.n = urlparse(args.url).netloc
+    
     return args
